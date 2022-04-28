@@ -1,0 +1,5 @@
+require "theme"
+require "settings"
+require "plugins"
+require "lsp"
+require "mappings"
