@@ -1,3 +1,0 @@
-ans="$(xprop | grep WM_CLASS | awk '{print $4}')"
-echo "$ans" | xclip -selection c
-notify-send "Class" "$ans" -i ~/.config/awesome/icons/notif.png
