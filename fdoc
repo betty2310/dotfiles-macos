@@ -1,0 +1,43 @@
+#!/usr/bin/sh
+# Rofi menu for quickly editing a file in some directory
+# Requires ripgrep
+# I use it for editing dotfiles in my ~/.config directory
+
+# Directory to search in
+dir="$HOME/OneDrive/20212"
+
+# Change directory so that the paths are shorter in rofi
+cd "$dir" || exit
+choice="$(rg --files --color=never --ignore-file "$ignore_file" | rofi -i -dmenu -theme ~/.config/rofi/nord/nord.rasi -p " File" -l 10)"
+
+if [[ -z "${choice// /}" ]]; then
+	exit 1
+fi
+
+if [ -f "$choice" ]; then
+	case "$choice" in
+	*.m4a | "mp3") xdg-open "$choice" ;;
+	*.pdf) zathura "$choice" ;;
+	*.pptx | "ppt") wpp "$choice" ;;
+	*.xlsx | *.xls | *.csv)
+		et "$choice"
+		;;
+	*.mp4 | *.mkv | *.gif)
+		vlc "$choice"
+		;;
+	*.mp3 | *.mkv | *.gif)
+		mpv "$choice"
+		;;
+	*.jpg | *.jpeg | *.png)
+		sxiv "$choice"
+		;;
+	*.doc | *.docx)
+		wps "$choice"
+		;;
+	*)
+		notify-send "📛 Cannot open this file "$choice"."
+		;;
+	esac
+else
+	notify-send "'$choice' is not a valid file"
+fi

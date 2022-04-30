@@ -9,7 +9,7 @@ format = '[$time](#4C566A)'
 time_format = "%T"
 
 [directory]
-format = "[$read_only](red)[ ](blue)[$path](bold italic #4c566a) "
+format = "[$read_only](red)[ ](blue)[$path](Bold italic #4c566a) "
 read_only = " "
 fish_style_pwd_dir_length = 1
 truncation_length = 4
@@ -23,7 +23,7 @@ vicmd_symbol = "[ ](yellow)"
 symbol = " "
 
 [nodejs]
-format = "via [ $version](bold yellow) "
+format = "via [ $version](bold green) "
 
 [python]
 symbol = " "
@@ -38,6 +38,9 @@ style = "bold green"
 
 [cmake]
 format = "via [卑$version](bold #B48EAD) "
+
+[java]
+format = "on [ $version](bold #D08770) "
 
 [golang]
 symbol = "ﳑ "
