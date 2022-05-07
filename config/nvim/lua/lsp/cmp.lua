@@ -5,27 +5,27 @@ if not ok then
 end
 
 local icons = {
-    Text = "",
+    Text = "",
     Method = "",
     Function = "",
     Constructor = "⌘",
     Field = "ﰠ",
-    Variable = "",
+    Variable = "",
     Class = "ﴯ",
     Interface = "",
-    Module = "",
+    Module = "",
     Property = "ﰠ",
     Unit = "塞",
     Value = "",
     Enum = "",
-    Keyword = "",
-    Snippet = "",
+    Keyword = "廓",
+    Snippet = "",
     Color = "",
     File = "",
     Reference = "",
-    Folder = "",
+    Folder = "",
     EnumMember = "",
-    Constant = "",
+    Constant = "",
     Struct = "פּ",
     Event = "",
     Operator = "",
@@ -43,21 +43,31 @@ cmp.setup {
         keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
         keyword_length = 1,
     },
+    
     formatting = {
-        format = function(entry, vim_item)
-            vim_item.kind = string.format("%s %s", icons[vim_item.kind], vim_item.kind)
-
-            vim_item.menu = ({
-                nvim_lsp = "[LSP]",
-                nvim_lua = "[LUA]",
-                buffer = "[BUFFER]",
-                path = "[PATH]",
-                vsnip = "[SNIPPET]",
-            })[entry.source.name]
+        fields = { "kind", "abbr", "menu" },
+        format = function(_, vim_item)
+            vim_item.menu = vim_item.kind
+            vim_item.kind = icons[vim_item.kind]
 
             return vim_item
         end,
     },
+    -- formatting = {
+    --     format = function(entry, vim_item)
+    --         vim_item.kind = string.format("%s %s", icons[vim_item.kind], vim_item.kind)
+    --
+    --         vim_item.menu = ({
+    --             nvim_lsp = "[LSP]",
+    --             nvim_lua = "[LUA]",
+    --             buffer = "[BUFFER]",
+    --             path = "[PATH]",
+    --             vsnip = "[SNIPPET]",
+    --         })[entry.source.name]
+    --
+    --         return vim_item
+    --     end,
+    -- },
     snippet = {
         expand = function(args)
             vim.fn["vsnip#anonymous"](args.body)

@@ -62,7 +62,13 @@ return packer.startup(function()
     use {
         "ggandor/lightspeed.nvim",
     }
-    use { "iamcco/markdown-preview.nvim" }
+    use {
+        "davidgranstrom/nvim-markdown-preview",
+        config = function()
+            vim.g.nvim_markdown_preview_format = "gfm"
+            vim.g.nvim_markdown_preview_theme = "github"
+        end,
+    }
     -- LSP
     use { "neovim/nvim-lspconfig" }
     use { "williamboman/nvim-lsp-installer" }
