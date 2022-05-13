@@ -77,10 +77,7 @@ return packer.startup(function()
     use { "folke/lsp-colors.nvim" }
     use {
         "tami5/lspsaga.nvim",
-        branch = "nvim6.0",
-        config = function()
-            lspsaga.setup { rename_prompt_prefix = "הּ" }
-        end,
+        config = require "plugins.config.lspsaga",
     }
     use { "folke/trouble.nvim" }
     use { "ray-x/lsp_signature.nvim", branch = "neovim-0.6" }

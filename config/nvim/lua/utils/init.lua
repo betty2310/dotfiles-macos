@@ -18,8 +18,8 @@ function _M.map(mode, lhs, rhs, opts)
 end
 
 _M.colors = {
-    bg = "#2e3440",
-    extra = "#2e3440",
+    bg = "#2e3640",
+    extra = "#2e3640",
     -- extra = "2D333E",
     bg1 = "#3b4252",
     bg2 = "#262b36",
