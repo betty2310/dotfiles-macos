@@ -1,115 +1,207 @@
-local packer = require "plugins.packerInit"
-local use = packer.use
+vim.cmd [[packadd packer.nvim]]
+
+local _packer, packer = pcall(require, "packer")
+
+if not _packer then
+    return
+end
+
+packer.init {
+    display = {
+        open_fn = function()
+            return require("packer.util").float { border = "single" }
+        end,
+        prompt_border = "single",
+    },
+    git = {
+        clone_timeout = 600,
+    },
+    auto_clean = true,
+    compile_on_sync = true,
+}
+
 return packer.startup(function()
-    use {
-        "wbthomason/packer.nvim",
-    }
+    use { "wbthomason/packer.nvim" }
     use { "lewis6991/impatient.nvim" }
 
-    -- UI (Color, statusline, dashboard...)
+    -- UI
     use { "betty2310/onenord.nvim" }
-    use { "L3MON4D3/LuaSnip" }
-    use { "rafamadriz/friendly-snippets" }
-
-    use { "kyazdani42/nvim-web-devicons" }
+    use { "ellisonleao/gruvbox.nvim" }
     use {
-        "nvim-lualine/lualine.nvim",
-        requires = { "kyazdani42/nvim-web-devicons", opt = true },
-        config = require "plugins.config.lualine",
+        "kyazdani42/nvim-web-devicons",
+        config = function()
+            require "plugins.configs.icons"
+        end,
     }
     use {
         "akinsho/bufferline.nvim",
-        requires = { "kyazdani42/nvim-web-devicons" },
-        config = require "plugins.config.bufferline",
-    }
-    use {
-        "goolord/alpha-nvim",
-        config = require "plugins.config.alpha",
+        after = "nvim-web-devicons",
+        config = function()
+            require "plugins.configs.bufferline"
+        end,
     }
     use {
         "folke/which-key.nvim",
     }
-    --  use { "petertriho/nvim-scrollbar", config = require "plugins.config.scrollbar" }
+    use {
+        "karb94/neoscroll.nvim",
+        config = function()
+            require "plugins.configs.neoscroll"
+        end,
+    }
+    use {
+        "feline-nvim/feline.nvim",
+        after = "nvim-web-devicons",
+        config = function()
+            require "plugins.configs.feline"
+        end,
+    }
 
-    -- Coding utilities
-    use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = require "plugins.config.treesitter" }
-    use { "windwp/nvim-ts-autotag" }
-    use { "p00f/nvim-ts-rainbow" }
+    -- -- Treesitter
+    use {
+        "nvim-treesitter/nvim-treesitter",
+        requires = {
+            "windwp/nvim-ts-autotag",
+            "p00f/nvim-ts-rainbow",
+            "nvim-treesitter/nvim-treesitter-textobjects",
+            "JoosepAlviste/nvim-ts-context-commentstring",
+        },
+        run = ":TSUpdate",
+        config = function()
+            require "plugins.configs.treesitter"
+        end,
+    }
+
+    -- -- Utilities
     use {
         "kyazdani42/nvim-tree.lua",
-        requires = {
-            "kyazdani42/nvim-web-devicons",
-        },
-        config = require "plugins.config.nvimtree",
+        after = "nvim-web-devicons",
+        config = function()
+            require "plugins.configs.nvimtree"
+        end,
     }
+    use 'ggandor/lightspeed.nvim'
     use {
         "nvim-telescope/telescope.nvim",
-        requires = { "nvim-lua/plenary.nvim" },
-        config = require "plugins.config.telescope",
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope-node-modules.nvim",
+        },
+        config = function()
+            require "plugins.configs.telescope"
+        end,
     }
     use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
-    use { "machakann/vim-sandwich" }
-    use { "lukas-reineke/indent-blankline.nvim", config = require "plugins.config.indent" }
-    use { "akinsho/toggleterm.nvim", config = require "plugins.config.toggleterm" }
-    use { "windwp/nvim-autopairs", config = require "plugins.config.autopairs" }
-    use { "norcalli/nvim-colorizer.lua" }
-    use { "liuchengxu/vista.vim" }
-    use { "simrat39/symbols-outline.nvim" }
+    use {
+        "lukas-reineke/indent-blankline.nvim",
+        config = function()
+            require "plugins.configs.indent"
+        end,
+    }
+    use {
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+        config = function()
+            require "plugins.configs.trouble"
+        end
+    }
+    use {
+        "windwp/nvim-autopairs",
+        config = function()
+            require "plugins.configs.autopair"
+        end,
+        setup = function()
+            require("utils").packer_lazy_load "nvim-autopairs"
+        end,
+    }
+    use {
+        "norcalli/nvim-colorizer.lua",
+        config = function()
+            require "plugins.configs.color"
+        end,
+    }
+    use { "gpanders/editorconfig.nvim" }
+
     use {
         "max397574/better-escape.nvim",
-        config = require "plugins.config.escape",
-    }
-    use {
-        "ggandor/lightspeed.nvim",
-    }
-    use {
-        "davidgranstrom/nvim-markdown-preview",
         config = function()
-            vim.g.nvim_markdown_preview_format = "gfm"
-            vim.g.nvim_markdown_preview_theme = "github"
-        end,
+            require "plugins.configs.better_escape"
+        end
     }
+
+
     -- LSP
-    use { "neovim/nvim-lspconfig" }
-    use { "williamboman/nvim-lsp-installer" }
-
-    -- -- Lint
-    use { "folke/lsp-colors.nvim" }
     use {
-        "tami5/lspsaga.nvim",
-        config = require "plugins.config.lspsaga",
+        "neovim/nvim-lspconfig",
+        requires = {
+            "folke/lua-dev.nvim",
+            "jose-elias-alvarez/typescript.nvim",
+        },
     }
-    use { "folke/trouble.nvim" }
-    use { "ray-x/lsp_signature.nvim", branch = "neovim-0.6" }
-
-    -- -- Comment
-    use { "numToStr/Comment.nvim", config = require "plugins.config.comment" }
-
-    -- -- Completion
-    use { "hrsh7th/nvim-cmp" }
-    use { "hrsh7th/cmp-nvim-lsp" }
-    use { "hrsh7th/cmp-nvim-lua" }
-    use { "hrsh7th/cmp-buffer" }
-    use { "hrsh7th/cmp-path" }
-    use { "hrsh7th/cmp-cmdline" }
-    use { "hrsh7th/cmp-nvim-lsp-document-symbol" }
-    use { "hrsh7th/cmp-vsnip" }
-    use { "hrsh7th/vim-vsnip" }
-    use { "hrsh7th/cmp-nvim-lsp-signature-help" }
-
-    -- Formatter and Linting
+    use {
+        "williamboman/nvim-lsp-installer",
+    }
+    use({
+        "glepnir/lspsaga.nvim",
+        branch = "main",
+        config = function()
+            require "plugins.configs.lspsaga"
+        end,
+    })
     use {
         "jose-elias-alvarez/null-ls.nvim",
-        config = function()
-            require("null-ls").setup()
-        end,
         requires = { "nvim-lua/plenary.nvim" },
-    } -- Seem like now it error, so remind me 5 months
+    }
+    use {
+        "j-hui/fidget.nvim",
+        config = function()
+            require "plugins.configs.fidget"
+        end,
+    }
 
-    use { "mhartington/formatter.nvim" }
+    -- -- Comment
+    use {
+        "numToStr/Comment.nvim",
+        config = function()
+            require "plugins.configs.comment"
+        end,
+        setup = function()
+            require("utils").packer_lazy_load "Comment.nvim"
+        end,
+    }
 
-    -- Tmux
-    use { "aserowy/tmux.nvim", config = require "plugins.config.tmux" }
+    -- -- Completion
+    use {
+        "hrsh7th/nvim-cmp",
+        requires = {
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-nvim-lua",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-vsnip",
+            "hrsh7th/vim-vsnip",
+            "hrsh7th/cmp-nvim-lsp-signature-help",
+        },
+        config = function()
+            require "plugins.configs.cmp"
+        end,
+    }
+
+    -- -- Snippets
+    use {
+        "dsznajder/vscode-es7-javascript-react-snippets",
+        run = "yarn install --frozen-lockfile && yarn compile",
+        setup = function()
+            require("utils").packer_lazy_load "vscode-es7-javascript-react-snippets"
+        end,
+    }
+    use {
+        "rafamadriz/friendly-snippets",
+        setup = function()
+            require("utils").packer_lazy_load "friendly-snippets"
+        end,
+    }
 
     -- Git
     use {
@@ -117,15 +209,18 @@ return packer.startup(function()
         requires = {
             "nvim-lua/plenary.nvim",
         },
-        config = require "plugins.config.gitsigns",
+        config = function()
+            require "plugins.configs.gitsigns"
+        end,
+        setup = function()
+            require("utils").packer_lazy_load "gitsigns.nvim"
+        end,
     }
-    -- test case
-    -- use {
-    --     "xeluxee/competitest.nvim",
-    --     requires = "MunifTanjim/nui.nvim",
-    --     config = require "plugins.config.competitest",
-    --}
 
-    -- debug
-    -- use { "puremourning/vimspector", config = require "plugins.config.dap" }
+    -- Markdown
+    use {
+        "iamcco/markdown-preview.nvim",
+        run = "cd app && npm install",
+        ft = { "markdown" },
+    }
 end)
