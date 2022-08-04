@@ -1,5 +1,5 @@
 # ThinkMac T490 🖥️
 
-![!](./assets/final.png)
+![!](./assets/preview.png)
 
 
