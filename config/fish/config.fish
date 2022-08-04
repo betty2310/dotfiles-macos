@@ -6,20 +6,22 @@ zoxide init fish | source
 
 # aliases
 alias llt="exa --icons --git -a --tree -s type -I '.git|node_modules|bower_components|build'"
+alias ls="logo-ls -XD"
+alias ll="logo-ls -XDlh"
+alias lla="logo-ls -a -XDlh"
 alias g git
 alias fetch="rxfetch"
 alias vi "nvim"
 alias nv "nvim"
 alias cl="clear"
 alias cat="bat"
-alias ls="logo-ls -XD"
-alias ll="logo-ls -XDlh"
-alias lla="logo-ls -a -XDlh"
-# alias ide="tmux split-window -v -p 30"
+alias ide="tmux split-window -v -p 30"
 alias za="zathura"
 alias dots="~/.scripts/dots.sh"
 alias fm="ranger"
 alias pls="sudo"
+
+alias fomatem="java --module-path /Users/betty/Downloads/javafx-sdk-18.0-1.1/lib --add-modules=javafx.controls,javafx.fxml -Dfile.encoding=UTF-8 -jar /Users/betty/ghq/github.com/betty2310/FOMATEM/App/out/artifacts/App_jar/App.jar"   
 
 # navigation
 alias ..='cd ..'
@@ -65,8 +67,11 @@ set -gx PATH node_modules/.bin $PATH
 set -gx PATH ~/.npm-global/bin $PATH
 
 # Go
+set -g GO ~/Developer/go
 set -g GOPATH $HOME/go $PATH
+set -g GOROOT /usr/local/opt/go/libexec $PATH
 set -gx PATH $GOPATH/bin $PATH
+set -gx PATH $GOROOT/bin $PATH
 
 # Rust path
 
