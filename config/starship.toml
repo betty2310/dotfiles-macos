@@ -9,7 +9,7 @@ format = '[$time](#4C566A)'
 time_format = "%T"
 
 [directory]
-format = "[$read_only](red)[ ](blue)[$path](Bold italic #4c566a) "
+format = "[$read_only](red)[ ](blue)[$path](bold italic #4c566a) "
 read_only = " "
 fish_style_pwd_dir_length = 1
 truncation_length = 4
@@ -20,37 +20,52 @@ success_symbol = "[ ](green)"
 vicmd_symbol = "[ ](yellow)"
 
 [package]
-symbol = " "
+symbol = " "
+style = "bold #D08770"
+
+[c] 
+symbol = " "
+style = "bold cyan"
+detect_extensions = ["c", "h", "cpp"]
+commands = [ [ "g++", "--version" ], [ "gcc", "--version" ], [ "clang", "--version" ] ]
 
 [nodejs]
 format = "via [ $version](bold green) "
+detect_files = ["package.json", ".node-version"]
+detect_folders = ["node_modules"]
 
 [python]
-symbol = " "
+symbol = " "
+format = 'via [${symbol}(${version} )(\($virtualenv\) )]($style)'
+style = "bold yellow"
+pyenv_prefix = "venv "
+python_binary = ["./venv/bin/python", "python", "python3", "python2"]
+detect_extensions = ["py"]
+version_format = "v${raw}"
 
 [lua]
-format = "via [ $version](bold yellow) "
+format = "via [ $version](bold blue) "
 
 [git_branch]
 symbol = " "
 format = "on [$symbol$branch]($style) "
-style = "bold green"
+style = "bold #B48EAD"
 
 [cmake]
-format = "via [卑$version](bold #B48EAD) "
+format = "with [卑$version](bold #B48EAD) "
+detect_files = ["CMakeLists.txt", "CMakeCache.txt"]
 
 [java]
-format = "on [ $version](bold #D08770) "
+format = "via [🌟 $version](bold yellow) "
 
 [golang]
 symbol = "ﳑ "
 
 [custom.docker]
-command = "docker version -f '{{.Server.Version}}' 2>/dev/null"
 files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile"]
 style = "blue bold"
-symbol = " v"
-format = "via [$symbol$output]($style) "
+symbol = " "
+format = "with [$symbol]($style) "
 
 [git_status]
 style = "bold red"
