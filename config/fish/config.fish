@@ -1,14 +1,13 @@
 set fish_greeting ""
 
 starship init fish | source
-thefuck --alias | source
 zoxide init fish | source
 
 # aliases
 alias llt="exa --icons --git -a --tree -s type -I '.git|node_modules|bower_components|build'"
 alias ls="logo-ls -XD"
 alias ll="logo-ls -XDlh"
-alias lla="logo-ls -a -XDlh"
+alias lla="exa --icons -la -B"
 alias g git
 alias fetch="rxfetch"
 alias vi "nvim"
@@ -20,6 +19,7 @@ alias za="zathura"
 alias dots="~/.scripts/dots.sh"
 alias fm="ranger"
 alias pls="sudo"
+alias py="python"
 
 alias fomatem="java --module-path /Users/betty/Downloads/javafx-sdk-18.0-1.1/lib --add-modules=javafx.controls,javafx.fxml -Dfile.encoding=UTF-8 -jar /Users/betty/ghq/github.com/betty2310/FOMATEM/App/out/artifacts/App_jar/App.jar"   
 
@@ -61,6 +61,7 @@ set -gx PATH ~/.bin $PATH
 set -gx PATH ~/.scripts $PATH
 set -gx PATH /usr/local/texlive/2021/bin/x86_64-linux/ $PATH
 set -gx PATH /Applications/Postgres.app/Contents/Versions/14/bin $PATH
+set -gx PATH /Users/betty/Library/Python/3.10/bin $PATH
 
 # NodeJS
 set -gx PATH node_modules/.bin $PATH
@@ -77,6 +78,8 @@ set -gx PATH $GOROOT/bin $PATH
 
 set -gx PATH ~/.cargo/bin $PATH
 
+set -x THEFUCK_OVERRIDDEN_ALIASES 'git'
+
 set -x FZF_DEFAULT_OPTS '--prompt="הּ "
     --color=hl:#81a1c1
     --color=hl+:#BF616A
@@ -90,9 +93,17 @@ set -x FZF_DEFAULT_OPTS '--prompt="הּ "
 #end
 # random cool image
 #colorscript -r
+
 function fish_title
     set -q argv[1];
     # Looks like ~/d/fish: [git log]
     # or /e/apt: [fish]
-    echo 🐟$USER@$hostname (fish_prompt_pwd_dir_length=1 prompt_pwd) [$argv];
+    echo 🐟 (fish_prompt_pwd_dir_length=1 prompt_pwd) [$argv];
 end
+    
+set -U fish_user_paths $HOME/.pyenv/bin $fish_user_paths
+
+# Load pyenv automatically by appending
+# the following to ~/.config/fish/config.fish:
+
+pyenv init - | source

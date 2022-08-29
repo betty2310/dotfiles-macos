@@ -38,9 +38,8 @@ detect_folders = ["node_modules"]
 symbol = " "
 format = 'via [${symbol}(${version} )(\($virtualenv\) )]($style)'
 style = "bold yellow"
-pyenv_prefix = "venv "
+pyenv_version_name = true
 python_binary = ["./venv/bin/python", "python", "python3", "python2"]
-detect_extensions = ["py"]
 version_format = "v${raw}"
 
 [lua]
