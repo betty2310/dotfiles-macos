@@ -42,13 +42,6 @@ alias mirror-update='sudo reflector -c Vietnam -c Japan -c Singapore -c India -a
 
 #color scheme
 
-set -U fish_color_param green
-set -U fish_color_command brblue
-set -U fish_color_operator green
-set -U SPACEFISH_DIR_COLOR green
-set -U fish_color_error red
-set -U fish_color_comment yellow
-set -U fish_color_quote yellow
 set -g EDITOR nvim
 #set -x TERM xterm-256color
 set -g man_bold -o green
@@ -62,6 +55,7 @@ set -gx PATH ~/.scripts $PATH
 set -gx PATH /usr/local/texlive/2021/bin/x86_64-linux/ $PATH
 set -gx PATH /Applications/Postgres.app/Contents/Versions/14/bin $PATH
 set -gx PATH /Users/betty/Library/Python/3.10/bin $PATH
+fish_add_path /Users/betty/.spicetify
 
 # NodeJS
 set -gx PATH node_modules/.bin $PATH
@@ -94,16 +88,56 @@ set -x FZF_DEFAULT_OPTS '--prompt="הּ "
 # random cool image
 #colorscript -r
 
-function fish_title
-    set -q argv[1];
-    # Looks like ~/d/fish: [git log]
-    # or /e/apt: [fish]
-    echo 🐟 (fish_prompt_pwd_dir_length=1 prompt_pwd) [$argv];
-end
+# function fish_title
+#     set -q argv[1];
+#     # Looks like ~/d/fish: [git log]
+#     # or /e/apt: [fish]
+#     echo 🐟 (fish_prompt_pwd_dir_length=1 prompt_pwd) [$argv];
+# end
     
 set -U fish_user_paths $HOME/.pyenv/bin $fish_user_paths
 
-# Load pyenv automatically by appending
-# the following to ~/.config/fish/config.fish:
-
 pyenv init - | source
+
+# colorscheme
+# set nord0 2e3440
+# set nord1 3b4252
+# set nord2 434c5e
+# set nord3 4c566a
+# set nord4 d8dee9
+# set nord5 e5e9f0
+# set nord6 eceff4
+# set nord7 8fbcbb
+# set nord8 88c0d0
+# set nord9 81a1c1
+# set nord10 5e81ac
+# set nord11 bf616a
+# set nord12 d08770
+# set nord13 ebcb8b
+# set nord14 a3be8c
+# set nord15 b48ead
+#
+set fish_color_normal brblack
+set fish_color_command yellow 
+set fish_color_redirection yellow 
+set fish_color_end yelow 
+set fish_color_error red 
+set fish_color_match orange 
+set fish_color_search_match blue 
+set fish_color_escape purple 
+set fish_color_cwd green 
+set fish_color_autosuggestion brblack 
+# set fish_color_user $nord4
+# set fish_color_host $nord9
+# set fish_color_cancel $nord15
+set fish_pager_color_prefix yellow 
+set fish_pager_color_completion brblack 
+set fish_pager_color_description blue 
+set fish_pager_color_progress green 
+set fish_pager_color_secondary green 
+set -U fish_color_param green
+set -U fish_color_command brblue
+set -U fish_color_operator green
+set -U SPACEFISH_DIR_COLOR green
+set -U fish_color_comment yellow
+set -U fish_color_quote yellow
