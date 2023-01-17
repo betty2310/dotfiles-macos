@@ -88,16 +88,12 @@ set -x FZF_DEFAULT_OPTS '--prompt="הּ "
 # random cool image
 #colorscript -r
 
-# function fish_title
-#     set -q argv[1];
-#     # Looks like ~/d/fish: [git log]
-#     # or /e/apt: [fish]
-#     echo 🐟 (fish_prompt_pwd_dir_length=1 prompt_pwd) [$argv];
-# end
-    
-set -U fish_user_paths $HOME/.pyenv/bin $fish_user_paths
-
-pyenv init - | source
+function fish_title
+    set -q argv[1];
+    # Looks like ~/d/fish: [git log]
+    # or /e/apt: [fish]
+    echo 🐟 (fish_prompt_pwd_dir_length=1 prompt_pwd) [$argv];
+end
 
 # colorscheme
 # set nord0 2e3440
@@ -141,3 +137,4 @@ set -U fish_color_operator green
 set -U SPACEFISH_DIR_COLOR green
 set -U fish_color_comment yellow
 set -U fish_color_quote yellow
+
