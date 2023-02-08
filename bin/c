@@ -5,8 +5,7 @@ VERSION=v0.14
 [[ -z "$C_CACHE_SIZE" ]] && C_CACHE_SIZE=$((5*1024))
 if ! [[ "$C_CACHE_SIZE" =~ ^[0-9]*$ ]]; then
     C_CACHE_SIZE=$((5*1024))
-    >&2 echo 'warning: $C_CACHE_SIZE should be a positive integer'
-fi
+    >&2 echo 'warning: $C_CACHE_SIZE should be a positive integer' fi
 
 help_msg() {
     >&$1 echo "Usage: $(basename "$0") <file.c ... | compiler_options ...> [program_arguments]"
