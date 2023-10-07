@@ -1,9 +1,0 @@
-#!/bin/bash 
-
-username=$(whoami)
-
-computer_name=$(cat /etc/hostname)
-
-output="$username@$computer_name"
-
-echo "$output"

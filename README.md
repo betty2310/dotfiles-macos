@@ -1,5 +1,4 @@
-# ThinkMac T490 🖥️
-
-![!](./assets/preview.png)
-
-
+```
+Thinkpad T440p
+Monsterey
+```

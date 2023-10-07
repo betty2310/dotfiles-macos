@@ -1,3 +1,0 @@
-name="$(whoami)"
-hostname="$(cat /proc/sys/kernel/hostname)"
-printf "$name"@"$hostname"

@@ -1,2 +1,4 @@
---theme="Nord"
+--theme=base16
+--style="numbers,changes,header"
 -pp
+
