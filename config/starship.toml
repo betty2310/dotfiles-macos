@@ -31,19 +31,6 @@ symbol = " "
 symbol = " "
 format = "on [$symbol$branch(:$remote_branch)]($style) "
 
-[git_status]
-style = "bold red dimmed"
-ahead = '[  $count](bold green)'
-behind = '[  $count](bold green)'
-untracked = '[  $count](bold yellow)'
-modified = '[  $count](bold orange)'
-staged = '[  $count](bold green)'
-renamed = '[  $count](bold yellow)'
-deleted = '[ $count](bold red)'
-conflicted = '[ﮗ $count](bold cyan)'
-diverged = '[↕ ${ahead_count}⇣${behind_count}](bold cyan)'
-stashed = '[ﰩ $count](bold yellow)'
-
 [cmake]
 symbol = "󰲉 "
 
@@ -64,8 +51,9 @@ symbol = "🍙 "
 
 [dotnet]
 format = "via [$symbol($version )]($style)"
-symbol = "󰪮 "
-style = "bold purple"
+symbol = "󱢺 "
+style = "bold cyan"
+version_format = "v${major}"
 
 [ruby]
 symbol = ' '
